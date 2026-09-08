@@ -1,5 +1,6 @@
 using UnityEngine;
 
+/// <summary> ダメージ情報を格納する構造体 </summary>
 public struct DamageData
 {
     public float Damage;

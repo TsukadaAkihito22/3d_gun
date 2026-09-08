@@ -1,5 +1,6 @@
 using UnityEngine;
 
+/// <summary> 敵の情報を管理するクラス </summary>
 public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField] private float _hp = 100f; // 敵の体力を指定するための変数

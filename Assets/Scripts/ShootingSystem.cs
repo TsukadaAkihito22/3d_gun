@@ -12,14 +12,26 @@ public class ShootingSystem : MonoBehaviour
     [Range(0f, 3f)]
     private float _fireRateTimer = 0f; // 射撃間隔のタイマー
 
-    
+    private Weapon _weapon = null;
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _weapon.StartReload();
+        }
+
         // マウスの左クリックで射撃
         if (Input.GetMouseButton(0) && _fireRateTimer >= _weaponController.CurrentWeapon.FireRate)
         {
+            _weapon = _weaponController.CurrentWeapon;    // 現在の武器データを取得
+
+            if (!_weapon.CanShoot) return;    // 射撃可能かどうかを判定
+
             Shoot();
+
+            _weapon.ConsumeAmmo();    // 弾薬を消費する
+
             _fireRateTimer = 0f;
         }
 
@@ -29,29 +41,32 @@ public class ShootingSystem : MonoBehaviour
     /// <summary> 射撃処理 </summary>
     void Shoot()
     {
-        Weapon weapon = _weaponController.CurrentWeapon;    // 現在の武器データを取得
+        _weapon = _weaponController.CurrentWeapon;    // 現在の武器データを取得
 
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);        // マウスの位置からレイを飛ばす
 
-        for (int i = 0; i < weapon.RayCount; i++)
+        for (int i = 0; i < _weapon.RayCount; i++)
         {
-            Ray spreadRay = CreateSpreadRay(ray, weapon.SpreadAngle);
+            Ray spreadRay = CreateSpreadRay(ray, _weapon.SpreadAngle);
 
-            //Vector3 endPosition = GetRayEndPosition(spreadRay, weapon.ShootRange);
+            Vector3 endPosition = spreadRay.origin + spreadRay.direction * _weapon.ShootRange;    // レイの終点を計算
+            
+            // 弾道の開始位置をカメラの少し左に設定
+            Vector3 trailStartPosiiton = _camera.transform.position
+                                            - _camera.transform.right * 0.05f
+                                            + _camera.transform.forward * 0.25f
+                                            - _camera.transform.up * 0.25f;
+            
 
-            //ShowTrail(spreadRay, endPosition);    // レイを可視化する
-
-            if (Physics.Raycast(spreadRay, out RaycastHit hit, weapon.ShootRange))       // 射程範囲内でレイが何かに当たった場合
+            if (Physics.Raycast(spreadRay, out RaycastHit hit, _weapon.ShootRange))       // 射程範囲内でレイが何かに当たった場合
             {
-                ShowTrail(spreadRay.origin, hit.point);    // レイを可視化する
+                ShowTrail(trailStartPosiiton, endPosition, hit.point);    // レイを可視化する
 
-                ProcessHit(hit, weapon);
+                ProcessHit(hit, _weapon);
             }
             else
             {
-                Vector3 endPosition = spreadRay.origin + spreadRay.direction * weapon.ShootRange;    // レイが何にも当たらなかった場合は射程範囲の終点を計算
-
-                ShowTrail(spreadRay.origin, endPosition);    // レイを可視化する
+                ShowTrail(trailStartPosiiton, endPosition, null);    // レイを可視化する
             }
         }
     }
@@ -102,9 +117,9 @@ public class ShootingSystem : MonoBehaviour
     }
 
     
-    private void ShowTrail(Vector3 startPosition, Vector3 endPosition)
+    private void ShowTrail(Vector3 startPosition, Vector3 endPosition, Vector3? hitPosition)
     {
         BulletTrail bulletTrail = Instantiate(_bulletTrailPrefab, startPosition, Quaternion.identity);
-        bulletTrail.Play(startPosition, endPosition);
+        bulletTrail.Play(startPosition, endPosition, hitPosition);
     }
 }

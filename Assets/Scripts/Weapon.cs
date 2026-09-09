@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary> 現在の武器ステータスを管理するクラス </summary>
@@ -15,6 +16,9 @@ public class Weapon : MonoBehaviour
     private int _magazineSize;
     private float _reloadTime;
 
+    //フラグ
+    private bool _isReloading = false;    // リロード中かどうかを判定するフラグ
+
     //プロパティ
     #region
     public WeaponData WeaponData => _weaponData;
@@ -26,7 +30,11 @@ public class Weapon : MonoBehaviour
     public int RayCount => _rayCount;
     public float SpreadAngle => _spreadAngle;
     public float ReloadTime => _reloadTime;
-    public int MagazineSize => _magazineSize;   
+    public int MagazineSize => _magazineSize;
+    public bool IsReloading => _isReloading;
+    public bool CanShoot => !_isReloading && _currentAmmo > 0;    // 射撃可能かどうかを判定するプロパティ
+
+    public bool CanReload => !_isReloading && _currentAmmo < _magazineSize;    // リロード可能かどうかを判定するプロパティ
     #endregion
 
     private void Awake()
@@ -40,6 +48,18 @@ public class Weapon : MonoBehaviour
         _reloadTime = _weaponData.ReloadTime;
 
         _currentAmmo = _weaponData.MagazineSize;    // 初期弾薬数をマガジンサイズに設定
+    }
+
+    public void ConsumeAmmo()
+    {
+        if(!CanShoot) return;
+
+        _currentAmmo--;
+
+        if (_currentAmmo == 0)
+        {
+            StartReload();
+        }
     }
 
 
@@ -58,5 +78,23 @@ public class Weapon : MonoBehaviour
         {
             _currentAmmo = _magazineSize;
         }
+    }
+
+    public void StartReload()
+    {
+        if (!CanReload) return;
+
+        StartCoroutine(ReloadCoroutine());
+    }
+
+    private IEnumerator ReloadCoroutine()
+    {
+        _isReloading = true;
+
+        yield return new WaitForSeconds(_reloadTime);
+
+        _currentAmmo = _magazineSize;
+
+        _isReloading = false;
     }
 }

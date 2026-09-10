@@ -6,6 +6,8 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] private WeaponData _weaponData;    // 武器データを格納する変数
 
+    [SerializeField] private AudioSource _audioSource;
+
     private int _currentAmmo;    // 現在の弾薬数を格納する変数
 
     private float _damage;
@@ -78,11 +80,15 @@ public class Weapon : MonoBehaviour
         {
             _currentAmmo = _magazineSize;
         }
+
+        Debug.Log("アップグレードしました！");
     }
 
     public void StartReload()
     {
         if (!CanReload) return;
+
+        _audioSource.PlayOneShot(_weaponData.ReloadSound);        //リロード音を再生
 
         StartCoroutine(ReloadCoroutine());
     }
@@ -96,5 +102,10 @@ public class Weapon : MonoBehaviour
         _currentAmmo = _magazineSize;
 
         _isReloading = false;
+    }
+
+    public void PlayShotSound()
+    {
+        _audioSource.PlayOneShot(_weaponData.ShotSound);
     }
 }

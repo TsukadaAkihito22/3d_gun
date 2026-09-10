@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab800bac4cee1f44697889e6584bc52e, type: 3}
-  m_Name: UpgradeReload
+  m_Name: UG_Damage
   m_EditorClassIdentifier: Assembly-CSharp::WeaponUpgrade
-  _upgradeName: "\u9AD8\u901F\u30EA\u30ED\u30FC\u30C9"
-  _description: "\u30EA\u30ED\u30FC\u30C9\u6642\u9593\u3092\u77ED\u7E2E\u3059\u308B"
-  _damagedAdd: 0
+  _upgradeName: "\u5F3E\u85AC\u5F37\u5316"
+  _description: "\u30C0\u30E1\u30FC\u30B8\u3092\u5897\u52A0\u3057\u307E\u3059"
+  _damagedAdd: 1
   _shootRangeAdd: 0
+  _fireRateSub: 0
   _rayCountAdd: 0
   _spreadAngleSub: 0
   _magazineSizeAdd: 0
-  _reloadTimeSub: -0.1
+  _reloadTimeSub: 0

@@ -43,6 +43,8 @@ public class ShootingSystem : MonoBehaviour
     {
         _weapon = _weaponController.CurrentWeapon;    // 現在の武器データを取得
 
+        _weapon.PlayShotSound();        //射撃音を再生
+
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);        // マウスの位置からレイを飛ばす
 
         for (int i = 0; i < _weapon.RayCount; i++)

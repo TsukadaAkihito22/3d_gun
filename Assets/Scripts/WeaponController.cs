@@ -7,4 +7,10 @@ public class WeaponController : MonoBehaviour
     
     //プロパティ
     public Weapon CurrentWeapon => _currentWeapon;
+
+    /// <summary> 現在の武器をアップグレードする </summary>
+    public void UpgradeCurrentWeapon(WeaponUpgrade upgrade)
+    {
+        _currentWeapon.UpgradeWeapon(upgrade);
+    }
 }

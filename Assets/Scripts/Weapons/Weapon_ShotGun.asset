@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ded8536523cc9ab429eadc7df93b4ad4, type: 3}
-  m_Name: WeaponData
+  m_Name: Weapon_ShotGun
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  _damage: 6
-  _shootRange: 50
-  _fireRate: 0.1
-  _rayCount: 1
-  _spreadAngle: 1
-  _magazineSize: 50
-  _reloadTime: 1
+  _damage: 5
+  _shootRange: 20
+  _fireRate: 0.5
+  _rayCount: 8
+  _spreadAngle: 4.5
+  _magazineSize: 10
+  _reloadTime: 1.5
+  _shotSound: {fileID: 8300000, guid: 38c83568372a2ef499185f1b2774ef94, type: 3}
+  _reloadSound: {fileID: 8300000, guid: 6cf6697b0a3497b45ab7f525229a5a14, type: 3}

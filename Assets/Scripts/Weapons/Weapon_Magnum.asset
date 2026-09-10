@@ -17,7 +17,7 @@ MonoBehaviour:
   _fireRate: 0.65
   _rayCount: 1
   _spreadAngle: 0
-  _magazineSize: 15
+  _magazineSize: 10
   _reloadTime: 2
   _shotSound: {fileID: 8300000, guid: 8e588a84ad8986845b7aed34183b0969, type: 3}
   _reloadSound: {fileID: 8300000, guid: 1355c0eac8d9f46488622a45b2bc3b46, type: 3}

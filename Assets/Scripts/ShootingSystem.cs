@@ -4,13 +4,17 @@ using UnityEngine;
 /// <summary> 射撃システムを管理するクラス </summary>
 public class ShootingSystem : MonoBehaviour
 {
+    [Header("参照")]
     [SerializeField] Camera _camera;
     [SerializeField] WeaponController _weaponController;
-
     [SerializeField] BulletTrail _bulletTrailPrefab;
 
     [Range(0f, 3f)]
     private float _fireRateTimer = 0f; // 射撃間隔のタイマー
+
+    [Header("エフェクト")]
+    [SerializeField] private GameObject _hitEffectPrefab;
+    [SerializeField] private GameObject _BulletHolePrefab;
 
     private Weapon _weapon = null;
 
@@ -53,7 +57,7 @@ public class ShootingSystem : MonoBehaviour
 
             Vector3 endPosition = spreadRay.origin + spreadRay.direction * _weapon.ShootRange;    // レイの終点を計算
             
-            // 弾道の開始位置をカメラの少し左に設定
+            // 弾道の開始位置をカメラの少し左斜め下奥に設定
             Vector3 trailStartPosiiton = _camera.transform.position
                                             - _camera.transform.right * 0.05f
                                             + _camera.transform.forward * 0.25f
@@ -80,7 +84,13 @@ public class ShootingSystem : MonoBehaviour
     {
         HitPart hitPart = hit.collider.GetComponent<HitPart>();    // 命中したオブジェクトがHitPartを持っているか確認
 
-        if (hitPart == null) return;
+        if (hitPart == null)
+        {
+            CreateBulletHoleEffect(hit);       //敵ではないオブジェクトなので弾痕を生成する
+            return;
+        }
+
+        CreateHitEffect(hit);      //ヒットエフェクトを生成する
 
         IDamageable damageable = hitPart.GetComponentInParent<IDamageable>();    // 命中したオブジェクトがIDamageableを実装しているか確認
 
@@ -117,11 +127,33 @@ public class ShootingSystem : MonoBehaviour
         // 新しいレイを作成して返す
         return new Ray(ray.origin, spreadDirection);
     }
-
     
     private void ShowTrail(Vector3 startPosition, Vector3 endPosition, Vector3? hitPosition)
     {
         BulletTrail bulletTrail = Instantiate(_bulletTrailPrefab, startPosition, Quaternion.identity);
         bulletTrail.Play(startPosition, endPosition, hitPosition);
     }
+
+
+    private void CreateHitEffect(RaycastHit hit)
+    {
+        //命中した面の法線方向にエフェクトを発生させる
+        Quaternion rotation = Quaternion.LookRotation(hit.normal);
+
+        Instantiate(_hitEffectPrefab, hit.point, rotation);
+    }
+
+
+    private void CreateBulletHoleEffect(RaycastHit hit)
+    {
+        //実際に命中した場所より、面と垂直に少しだけ離らかす
+        Vector3 position = hit.point + hit.normal * 0.01f;
+
+        Quaternion rotation = Quaternion.LookRotation(-hit.normal);
+
+        //消すために記憶
+        GameObject bulletHole = Instantiate(_BulletHolePrefab, position, rotation);
+    }
+
+    
 }

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded8536523cc9ab429eadc7df93b4ad4, type: 3}
   m_Name: Weapon_ShotGun
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  _damage: 5
-  _shootRange: 20
+  _damage: 9
+  _shootRange: 30
   _fireRate: 0.5
   _rayCount: 8
   _spreadAngle: 4.5
-  _magazineSize: 10
+  _magazineSize: 15
   _reloadTime: 1.5
   _shotSound: {fileID: 8300000, guid: 38c83568372a2ef499185f1b2774ef94, type: 3}
   _reloadSound: {fileID: 8300000, guid: 6cf6697b0a3497b45ab7f525229a5a14, type: 3}

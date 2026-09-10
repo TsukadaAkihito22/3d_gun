@@ -19,5 +19,5 @@ MonoBehaviour:
   _spreadAngle: 1
   _magazineSize: 50
   _reloadTime: 1.5
-  _shotSound: {fileID: 8300000, guid: 7bb01c80598874b4fbca75af4113ea19, type: 3}
+  _shotSound: {fileID: 8300000, guid: 7727db12a00dc76469a1a60952326aab, type: 3}
   _reloadSound: {fileID: 8300000, guid: 74d25aa3d34e8e441b6b7916be227c21, type: 3}

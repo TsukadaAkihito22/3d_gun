@@ -88,7 +88,7 @@ public class Weapon : MonoBehaviour
     {
         if (!CanReload) return;
 
-        _audioSource.PlayOneShot(_weaponData.ReloadSound);        //リロード音を再生
+        PlayReloadSound();        //リロード音を再生
 
         StartCoroutine(ReloadCoroutine());
     }
@@ -106,6 +106,18 @@ public class Weapon : MonoBehaviour
 
     public void PlayShotSound()
     {
+        if (_currentAmmo < _magazineSize * 0.3f)
+        {
+            _audioSource.pitch = 1.4f;
+        }
+
         _audioSource.PlayOneShot(_weaponData.ShotSound);
+    }
+
+    public void PlayReloadSound()
+    {
+        _audioSource.pitch = 1.0f;
+
+        _audioSource.PlayOneShot(_weaponData.ReloadSound);
     }
 }

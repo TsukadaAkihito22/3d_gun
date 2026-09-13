@@ -20,4 +20,4 @@ MonoBehaviour:
   _rayCountAdd: 0
   _spreadAngleSub: 0
   _magazineSizeAdd: 0
-  _reloadTimeSub: 0.1
+  _reloadTimeSub: 0.2

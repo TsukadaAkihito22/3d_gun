@@ -7,14 +7,15 @@ public class ShootingSystem : MonoBehaviour
     [Header("参照")]
     [SerializeField] Camera _camera;
     [SerializeField] WeaponController _weaponController;
-    [SerializeField] BulletTrail _bulletTrailPrefab;
+    
 
     [Range(0f, 3f)]
     private float _fireRateTimer = 0f; // 射撃間隔のタイマー
 
     [Header("エフェクト")]
-    [SerializeField] private GameObject _hitEffectPrefab;
-    [SerializeField] private GameObject _BulletHolePrefab;
+    [SerializeField] private ObjectPool _bulletTrailPool;
+    [SerializeField] private ObjectPool _hitEffectPool;
+    [SerializeField] private ObjectPool _BulletHolePool;
 
     private Weapon _weapon = null;
 
@@ -128,10 +129,17 @@ public class ShootingSystem : MonoBehaviour
         return new Ray(ray.origin, spreadDirection);
     }
     
+    /// <summary> 弾道の生成 </summary>
     private void ShowTrail(Vector3 startPosition, Vector3 endPosition, Vector3? hitPosition)
     {
-        BulletTrail bulletTrail = Instantiate(_bulletTrailPrefab, startPosition, Quaternion.identity);
+        GameObject obj = _bulletTrailPool.Get();
+
+        BulletTrail bulletTrail = obj.GetComponent<BulletTrail>();
+
         bulletTrail.Play(startPosition, endPosition, hitPosition);
+
+        //BulletTrail bulletTrail = Instantiate(_bulletTrailPrefab, startPosition, Quaternion.identity);
+        //bulletTrail.Play(startPosition, endPosition, hitPosition);
     }
 
 
@@ -140,7 +148,9 @@ public class ShootingSystem : MonoBehaviour
         //命中した面の法線方向にエフェクトを発生させる
         Quaternion rotation = Quaternion.LookRotation(hit.normal);
 
-        Instantiate(_hitEffectPrefab, hit.point, rotation);
+        GameObject HitEffect = _hitEffectPool.Get();
+
+        HitEffect.transform.SetPositionAndRotation(hit.point, rotation);
     }
 
 
@@ -151,9 +161,8 @@ public class ShootingSystem : MonoBehaviour
 
         Quaternion rotation = Quaternion.LookRotation(-hit.normal);
 
-        //消すために記憶
-        GameObject bulletHole = Instantiate(_BulletHolePrefab, position, rotation);
-    }
+        GameObject BulletHole = _BulletHolePool.Get();
 
-    
+        BulletHole.transform.SetPositionAndRotation(position, rotation);
+    }
 }

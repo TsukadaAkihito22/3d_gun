@@ -1,11 +1,15 @@
 using UnityEngine;
 using System.Collections;
 
-public class BulletTrail : MonoBehaviour
+public class BulletTrail : MonoBehaviour, IPoolable
 {
     [SerializeField] private LineRenderer _lineRenderer; // 弾道を描画するためのLineRenderer
     [SerializeField] private float _travelTime = 0.05f; // 弾道が消えるまでの時間
     [SerializeField] private float _trailLength = 5f; //弾道の長さ
+
+    private ObjectPool _objectPool;
+
+    private Coroutine _showTrailCoroutine;
 
 
     private void Awake()
@@ -13,8 +17,6 @@ public class BulletTrail : MonoBehaviour
         // LineRendererの初期設定
         _lineRenderer.positionCount = 2; // 弾道は2点で構成される
         _lineRenderer.useWorldSpace = true;
-
-
 
         Gradient gradient = new Gradient();
 
@@ -24,12 +26,37 @@ public class BulletTrail : MonoBehaviour
         );
 
         _lineRenderer.colorGradient = gradient;
+
+        ResetTrail();
+    }
+
+    /// <summary> オブジェクトプールの参照 </summary>
+    /// <param name="objectPool"> オブジェクトプール </param>
+    public void SetPool(ObjectPool objectPool)
+    {
+        _objectPool = objectPool;
     }
 
     /// <summary> 弾道を描画するメソッド </summary>
     public void Play(Vector3 startPosition, Vector3 endPosition, Vector3? hitPosition)
     {
-        StartCoroutine(ShowTrail(startPosition, endPosition, hitPosition));
+        if (_showTrailCoroutine != null)
+        {
+            StopCoroutine(_showTrailCoroutine);
+            _showTrailCoroutine = null;
+        }
+
+        ResetTrail();
+
+        transform.position = startPosition;
+
+        //LineRendererの位置を初期化
+        _lineRenderer.SetPosition(0, startPosition);
+        _lineRenderer.SetPosition(1,startPosition);
+
+        _lineRenderer.enabled = true;
+
+        _showTrailCoroutine = StartCoroutine(ShowTrail(startPosition, endPosition, hitPosition));
     }
 
 
@@ -75,8 +102,42 @@ public class BulletTrail : MonoBehaviour
             yield return null;
         }
 
-        _lineRenderer.enabled = false; // 弾道を非表示にする
+        ReturnToPool();
+    }
 
-        Destroy(gameObject);
+
+    private void ResetTrail()
+    {
+        _lineRenderer.enabled = false;      //弾道を非表示にする
+
+        _lineRenderer.SetPosition(0, Vector3.zero);
+        _lineRenderer.SetPosition(1, Vector3.zero);
+    }
+
+
+    private void ReturnToPool()
+    {
+        _showTrailCoroutine = null;
+
+        ResetTrail();
+
+        if (_objectPool != null)
+        {
+            _objectPool.Release(gameObject);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_showTrailCoroutine != null)
+        {
+            StopCoroutine( _showTrailCoroutine );
+
+            _showTrailCoroutine = null;
+        }
     }
 }

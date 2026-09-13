@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded8536523cc9ab429eadc7df93b4ad4, type: 3}
   m_Name: Weapon_Magnum
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  _damage: 35
+  _damage: 37
   _shootRange: 50
   _fireRate: 0.65
   _rayCount: 1
   _spreadAngle: 0
   _magazineSize: 10
   _reloadTime: 2
-  _shotSound: {fileID: 8300000, guid: 8e588a84ad8986845b7aed34183b0969, type: 3}
+  _shotSound: {fileID: 8300000, guid: a5e93b8f7324fd743a825ef7875d71a3, type: 3}
   _reloadSound: {fileID: 8300000, guid: 1355c0eac8d9f46488622a45b2bc3b46, type: 3}

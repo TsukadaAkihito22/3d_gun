@@ -497,6 +497,50 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &371636162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 371636164}
+  - component: {fileID: 371636163}
+  m_Layer: 0
+  m_Name: GameFlowSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &371636163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371636162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd831e09f4b15f14c9a27374140f9564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameFlowController
+--- !u!4 &371636164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371636162}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.36621, y: 0, z: 13.41744}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &404229905
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitPart
   _hitPartType: 2
-  _damageMultiplier: 1.2
+  _damageMultiplier: 1.25
 --- !u!136 &520771660
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1105,7 +1149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitPart
   _hitPartType: 2
-  _damageMultiplier: 1.2
+  _damageMultiplier: 1.25
 --- !u!136 &720744286
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2464,7 +2508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitPart
   _hitPartType: 2
-  _damageMultiplier: 1.2
+  _damageMultiplier: 1.25
 --- !u!136 &1529465538
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2604,6 +2648,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1559958483}
   - component: {fileID: 1559958482}
+  - component: {fileID: 1559958488}
+  - component: {fileID: 1559958490}
+  - component: {fileID: 1559958489}
   - component: {fileID: 1559958484}
   - component: {fileID: 1559958485}
   - component: {fileID: 1559958486}
@@ -2629,9 +2676,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShootingSystem
   _camera: {fileID: 330585545}
   _weaponController: {fileID: 1559958484}
-  _bulletTrailPrefab: {fileID: 4778797044932126564, guid: 82233615a07a3b146a381eb69716b621, type: 3}
-  _hitEffectPrefab: {fileID: 8644305522952180028, guid: d7e1285a0dd380d419e5de7a2d8c95fc, type: 3}
-  _BulletHolePrefab: {fileID: 7730637698667629638, guid: b159ada310b292e47b39c470e56a678f, type: 3}
+  _bulletTrailPool: {fileID: 1559958488}
+  _hitEffectPool: {fileID: 1559958490}
+  _BulletHolePool: {fileID: 1559958489}
 --- !u!4 &1559958483
 Transform:
   m_ObjectHideFlags: 0
@@ -2672,7 +2719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87ff7eb1191c644c9f07c4f04606314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  _weaponData: {fileID: 11400000, guid: db113a3dc079d0f489f86aa09e7c57ce, type: 2}
+  _weaponData: {fileID: 11400000, guid: 1f9b01bfe385092419dbd11016b0933c, type: 2}
   _audioSource: {fileID: 1559958487}
 --- !u!120 &1559958486
 LineRenderer:
@@ -2881,6 +2928,48 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1559958488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559958481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54df51458317b5418ed1b18b2cd03b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
+  _objectPrefab: {fileID: 5293127094118362918, guid: 82233615a07a3b146a381eb69716b621, type: 3}
+  _intialValue: 10
+--- !u!114 &1559958489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559958481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54df51458317b5418ed1b18b2cd03b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
+  _objectPrefab: {fileID: 7730637698667629638, guid: b159ada310b292e47b39c470e56a678f, type: 3}
+  _intialValue: 20
+--- !u!114 &1559958490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559958481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54df51458317b5418ed1b18b2cd03b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
+  _objectPrefab: {fileID: 8644305522952180028, guid: d7e1285a0dd380d419e5de7a2d8c95fc, type: 3}
+  _intialValue: 10
 --- !u!1 &1777667706
 GameObject:
   m_ObjectHideFlags: 0
@@ -3185,7 +3274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitPart
   _hitPartType: 2
-  _damageMultiplier: 1.2
+  _damageMultiplier: 1.25
 --- !u!136 &1823420776
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3314,7 +3403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitPart
   _hitPartType: 2
-  _damageMultiplier: 1.2
+  _damageMultiplier: 1.25
 --- !u!136 &1847012458
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3832,14 +3921,15 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 330585546}
+  - {fileID: 454025410}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1559958483}
+  - {fileID: 371636164}
   - {fileID: 549970610}
   - {fileID: 404229907}
   - {fileID: 1878945495}
   - {fileID: 1534837219}
   - {fileID: 874073087}
-  - {fileID: 454025410}
   - {fileID: 84896467}
   - {fileID: 1278223532}

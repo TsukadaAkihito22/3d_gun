@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using TMPro.EditorUtilities;
-using UnityEditor;
 using UnityEngine;
 
 public class ObjectPool : MonoBehaviour

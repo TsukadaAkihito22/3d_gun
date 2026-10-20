@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WeaponUpgrade", menuName = "Game/Weapon Upgrade")]
@@ -16,10 +17,14 @@ public class WeaponUpgrade : ScriptableObject
     [SerializeField] private int _magazineSizeAdd;
     [SerializeField] private float _reloadTimeSub;
 
-    // プロパティ
-    #region
+    [Header("アップグレードグループ")]
+    [SerializeField] private UpgradeGroup _upgradeGroup;
+
+    #region プロパティ
     public string UpgradeName => _upgradeName;
     public string Description => _description;
+
+    public UpgradeGroup UpgradeGroup => _upgradeGroup;
 
     public float DamagedAdd => _damagedAdd;
     public float ShootRangeAdd => _shootRangeAdd;

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775d3ff76bfefe541a16f370c031c762, type: 3}
+  m_Name: EnemyGroup_3
+  m_EditorClassIdentifier: Assembly-CSharp::BattleEnemyGroup
+  _enemyGroupName: 
+  _waves:
+  - _spawnDatas:
+    - _enemyPrefab: {fileID: 3208702262822552072, guid: f79223971da557f48a103a2ed9997330, type: 3}
+      _spawnPointId: 1-4
+      _spawnCount: 1
+      _spawnDelay: 0
+    - _enemyPrefab: {fileID: 3208702262822552072, guid: f79223971da557f48a103a2ed9997330, type: 3}
+      _spawnPointId: 1-5
+      _spawnCount: 1
+      _spawnDelay: 0
+    - _enemyPrefab: {fileID: 3208702262822552072, guid: f79223971da557f48a103a2ed9997330, type: 3}
+      _spawnPointId: 1-5
+      _spawnCount: 1
+      _spawnDelay: 1
+    - _enemyPrefab: {fileID: 3208702262822552072, guid: f79223971da557f48a103a2ed9997330, type: 3}
+      _spawnPointId: 1-5
+      _spawnCount: 1
+      _spawnDelay: 1
+    - _enemyPrefab: {fileID: 3208702262822552072, guid: f79223971da557f48a103a2ed9997330, type: 3}
+      _spawnPointId: 1-5
+      _spawnCount: 1
+      _spawnDelay: 1

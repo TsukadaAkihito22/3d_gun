@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab800bac4cee1f44697889e6584bc52e, type: 3}
-  m_Name: UG_Mag_Reload
+  m_Name: UG_Sub_Damage
   m_EditorClassIdentifier: Assembly-CSharp::WeaponUpgrade
-  _upgradeName: "\u9AD8\u901F\u30EA\u30ED\u30FC\u30C9(\u30DE\u30B0\u30CA\u30E0)"
-  _description: "\u30DE\u30B0\u30CA\u30E0\u306E\u30EA\u30ED\u30FC\u30C9\u6642\u9593\u3092\u77ED\u7E2E\u3059\u308B"
-  _damagedAdd: 0
+  _upgradeName: "\u5F3E\u85AC\u5F37\u5316"
+  _description: "\u30B5\u30D6\u30DE\u30B7\u30F3\u30AC\u30F3\u306E\u30C0\u30E1\u30FC\u30B8\u3092\u5897\u52A0\u3059\u308B(+0.5\u30C0\u30E1\u30FC\u30B8)"
+  _damagedAdd: 0.5
   _shootRangeAdd: 0
   _fireRateSub: 0
   _rayCountAdd: 0
   _spreadAngleSub: 0
   _magazineSizeAdd: 0
-  _reloadTimeSub: 0.2
+  _reloadTimeSub: 0
+  _upgradeGroup: 3

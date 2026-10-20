@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d497facfbdd6f429af602a90fb0b74, type: 3}
+  m_Name: Stage_01
+  m_EditorClassIdentifier: Assembly-CSharp::StageData
+  _steps:
+  - _phaseType: 2
+    _battleEnemyGroup: {fileID: 11400000, guid: 70a401dbc8a069f4d90e8b8846b25fec, type: 2}
+    _cameraSequenceData: {fileID: 0}
+    _reauiredSelectionCount: 0
+  - _phaseType: 1
+    _battleEnemyGroup: {fileID: 0}
+    _cameraSequenceData: {fileID: 11400000, guid: 91deabc9c056e314fafe56e7cb462b58, type: 2}
+    _reauiredSelectionCount: 0
+  - _phaseType: 2
+    _battleEnemyGroup: {fileID: 11400000, guid: 2b435bb9bdc8ea04db0bca531e4361d0, type: 2}
+    _cameraSequenceData: {fileID: 0}
+    _reauiredSelectionCount: 0
+  - _phaseType: 3
+    _battleEnemyGroup: {fileID: 0}
+    _cameraSequenceData: {fileID: 0}
+    _reauiredSelectionCount: 2
+  - _phaseType: 1
+    _battleEnemyGroup: {fileID: 0}
+    _cameraSequenceData: {fileID: 11400000, guid: 50f86a97e1f17be4786f20accd80e9d1, type: 2}
+    _reauiredSelectionCount: 0
+  - _phaseType: 2
+    _battleEnemyGroup: {fileID: 11400000, guid: 2887aeb7f7d3a4748a457223c344f2c5, type: 2}
+    _cameraSequenceData: {fileID: 0}
+    _reauiredSelectionCount: 0
+  - _phaseType: 1
+    _battleEnemyGroup: {fileID: 0}
+    _cameraSequenceData: {fileID: 11400000, guid: 8774172197e24d04db32f3f37eda5d25, type: 2}
+    _reauiredSelectionCount: 2
+  - _phaseType: 2
+    _battleEnemyGroup: {fileID: 11400000, guid: 844481f9f61a0cb449770454c9820af2, type: 2}
+    _cameraSequenceData: {fileID: 0}
+    _reauiredSelectionCount: 0
+  - _phaseType: 3
+    _battleEnemyGroup: {fileID: 0}
+    _cameraSequenceData: {fileID: 0}
+    _reauiredSelectionCount: 2
+  - _phaseType: 2
+    _battleEnemyGroup: {fileID: 11400000, guid: 844481f9f61a0cb449770454c9820af2, type: 2}
+    _cameraSequenceData: {fileID: 0}
+    _reauiredSelectionCount: 0
+  - _phaseType: 3
+    _battleEnemyGroup: {fileID: 0}
+    _cameraSequenceData: {fileID: 0}
+    _reauiredSelectionCount: 2
+  - _phaseType: 1
+    _battleEnemyGroup: {fileID: 0}
+    _cameraSequenceData: {fileID: 11400000, guid: 13f9d48c414fbc44cb64363c6b41980f, type: 2}
+    _reauiredSelectionCount: 0
+  - _phaseType: 2
+    _battleEnemyGroup: {fileID: 11400000, guid: 16a45648f3edc68448cd7afe545508a8, type: 2}
+    _cameraSequenceData: {fileID: 0}
+    _reauiredSelectionCount: 0
+  - _phaseType: 3
+    _battleEnemyGroup: {fileID: 0}
+    _cameraSequenceData: {fileID: 0}
+    _reauiredSelectionCount: 2

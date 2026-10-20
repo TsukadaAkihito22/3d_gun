@@ -4,6 +4,7 @@ using UnityEngine;
 /// <summary> 現在の武器ステータスを管理するクラス </summary>
 public class Weapon : MonoBehaviour
 {
+    [SerializeField] private WeaponType _weaponType;
     [SerializeField] private WeaponData _weaponData;    // 武器データを格納する変数
 
     [SerializeField] private AudioSource _audioSource;
@@ -23,6 +24,7 @@ public class Weapon : MonoBehaviour
 
     //プロパティ
     #region
+    public WeaponType WeaponType => _weaponType;
     public WeaponData WeaponData => _weaponData;
     public int CurrentAmmo => _currentAmmo;
 
@@ -52,6 +54,24 @@ public class Weapon : MonoBehaviour
         _currentAmmo = _weaponData.MagazineSize;    // 初期弾薬数をマガジンサイズに設定
     }
 
+    public void SetWeaponData(WeaponType weaponType, WeaponData weaponData)
+    {
+        _weaponType = weaponType;
+        _weaponData = weaponData;
+
+        _damage = _weaponData.Damage;
+        _shootRange = _weaponData.ShootRange;
+        _fireRate = _weaponData.FireRate;
+        _rayCount = _weaponData.RayCount;
+        _spreadAngle = _weaponData.SpreadAngle;
+        _magazineSize = _weaponData.MagazineSize;
+        _reloadTime = _weaponData.ReloadTime;
+
+        _currentAmmo = _magazineSize;
+
+        _isReloading = false;
+    }
+
     public void ConsumeAmmo()
     {
         if(!CanShoot) return;
@@ -69,11 +89,26 @@ public class Weapon : MonoBehaviour
     {
         _damage += upgrade.DamagedAdd;
         _shootRange += upgrade.ShootRangeAdd;
-        _fireRate += upgrade.FireRateSub;
+        _fireRate -= upgrade.FireRateSub;
         _rayCount += upgrade.RayCountAdd;
         _spreadAngle -= upgrade.SpreadAngleSub;
         _magazineSize += upgrade.MagazineSizeAdd;
         _reloadTime -= upgrade.ReloadTimeSub;
+
+        if (_fireRate <= 0)
+        {
+            _fireRate = 0.01f;
+        }
+
+        if (_spreadAngle <= 0)
+        {
+            _spreadAngle = 0;
+        }
+
+        if (_reloadTime <= 0)
+        {
+            _reloadTime = 0.1f;
+        }
 
         // 現在の弾薬数をマガジンサイズに合わせて調整
         if (_currentAmmo < _magazineSize)
@@ -106,7 +141,7 @@ public class Weapon : MonoBehaviour
 
     public void PlayShotSound()
     {
-        if (_currentAmmo < _magazineSize * 0.3f)
+        if (_currentAmmo <= _magazineSize * 0.35f)
         {
             _audioSource.pitch = 1.4f;
         }

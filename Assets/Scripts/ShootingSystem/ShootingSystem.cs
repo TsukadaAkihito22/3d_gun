@@ -18,13 +18,17 @@ public class ShootingSystem : MonoBehaviour
     [SerializeField] private ObjectPool _BulletHolePool;
 
     private Weapon _weapon = null;
+    private bool _isEventing = false;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetMouseButton(1))
         {
+            _weapon = _weaponController.CurrentWeapon;
             _weapon.StartReload();
         }
+
+        if (_isEventing) return;
 
         // マウスの左クリックで射撃
         if (Input.GetMouseButton(0) && _fireRateTimer >= _weaponController.CurrentWeapon.FireRate)
@@ -164,5 +168,10 @@ public class ShootingSystem : MonoBehaviour
         GameObject BulletHole = _BulletHolePool.Get();
 
         BulletHole.transform.SetPositionAndRotation(position, rotation);
+    }
+
+    public void ChangeEventingFlag(bool enabled)
+    {
+        _isEventing = enabled;
     }
 }

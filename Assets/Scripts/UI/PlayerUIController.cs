@@ -12,7 +12,6 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField] private GameObject[] _lifes;
 
     [Header("設定")]
-    [SerializeField] private float bAppearDuration = 0.1f; // 上から下へ現れる時間（約0.1秒）
     [SerializeField] private float aFadeDuration = 0.5f;   // Aが消える時間
     [SerializeField] private float bFadeDuration = 1.5f;   // Bが消える時間
 

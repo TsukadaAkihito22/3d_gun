@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [Header("参照")]
     [SerializeField] private Animator _normalZombieAnimator;
+    [SerializeField] private Animator _throwZombieAnimator;
+    [SerializeField] private GameObject _throwObj;
     private PlayerUIController _playerUIcontroller;
 
     [SerializeField] private int _modeNum = 0;
@@ -23,15 +25,17 @@ public class Enemy : MonoBehaviour, IDamageable
     private PlayerStatus _playerStatus;
 
     private static readonly int IsHalfHP = Animator.StringToHash("isHalfHP");
-
     private static readonly int IsDead = Animator.StringToHash("isDead");
-
     private static readonly int IsClosePlayer = Animator.StringToHash("isClosePlayer");
+    private static readonly int IsAttack = Animator.StringToHash("isAttack");
 
     private float _currentHP = 0f;
     private bool _isRunnig = false;
     private bool _isDead = false;
     private Transform _playerTransform;
+
+    private float _attackTimer = 0f;
+    private int _attackSpan = 0;
 
     public event Action<Enemy> EnemyDied;      //敵死亡通知イベント
 
@@ -48,10 +52,17 @@ public class Enemy : MonoBehaviour, IDamageable
 
         _playerUIcontroller = FindFirstObjectByType<PlayerUIController>();
 
+        // modeNumが1の場合の初期化
         if (_modeNum == 1)
         {
-            _normalZombieAnimator.SetBool(IsHalfHP, true);
+            if (_normalZombieAnimator != null) _normalZombieAnimator.SetBool(IsHalfHP, true);
             _isRunnig = true;
+        }
+
+        // modeNumが2の場合の初期化
+        if (_modeNum == 2)
+        {
+            _attackSpan = UnityEngine.Random.Range(1, 2);
         }
     }
 
@@ -65,55 +76,85 @@ public class Enemy : MonoBehaviour, IDamageable
             $" 残りHP: {_currentHP}"
         );
 
-        if (_currentHP <= _maxHP / 2)
+        //体力半減処理
+        if (_modeNum != 2 && _currentHP <= _maxHP / 2)
         {
-            _normalZombieAnimator.SetBool(IsHalfHP, true);
+            if (_normalZombieAnimator != null) _normalZombieAnimator.SetBool(IsHalfHP, true);
             _isRunnig = true;
         }
 
-        //死亡処理(変更予定)
+        //死亡処理
         if (_currentHP <= 0)
         {
             _isDead = true;
-            _normalZombieAnimator.SetBool(IsDead, true);
+
+            // モードに応じて死亡アニメーションを切り替え
+            if (_modeNum == 2 && _throwZombieAnimator != null)
+            {
+                _throwZombieAnimator.SetBool(IsDead, true);
+            }
+            else if (_normalZombieAnimator != null)
+            {
+                _normalZombieAnimator.SetBool(IsDead, true);
+            }
+
             Destroy(gameObject, 1f);
         }
     }
 
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, _playerTransform.position);
+        if (_isDead) return;
 
-        bool isClose = distance <= _attackArea;
+        // プレイヤーの方向を向く（投擲モードでもプレイヤーを向かせるため）
+        LookAtPlayer();
 
-        _normalZombieAnimator.SetBool(IsClosePlayer, isClose);
-
-        if (!isClose)
+        if (_modeNum == 2)
         {
-            MoveToPlayer();
+            _attackTimer += Time.deltaTime;
+
+            if (_attackTimer > _attackSpan)
+            {
+                if (_throwZombieAnimator != null) _throwZombieAnimator.SetBool(IsAttack, true);
+                _attackSpan = UnityEngine.Random.Range(6, 8);
+                _attackTimer = 0f;
+            }
+        }
+        else
+        {
+            float distance = Vector3.Distance(transform.position, _playerTransform.position);
+            bool isClose = distance <= _attackArea;
+
+            if (_normalZombieAnimator != null) _normalZombieAnimator.SetBool(IsClosePlayer, isClose);
+
+            if (!isClose)
+            {
+                MoveToPlayer();
+            }
+        }
+    }
+
+    private void LookAtPlayer()
+    {
+        Vector3 direction = _playerTransform.position - transform.position;
+        direction.y = 0f;
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+            transform.forward = direction;
         }
     }
 
     private void MoveToPlayer()
     {
-        if (_isDead) return;
-
         Vector3 direction = _playerTransform.position - transform.position;
-
         direction.y = 0f;
 
-        if (direction.sqrMagnitude <= 0.001f)
-        {
-            return;
-        }
+        if (direction.sqrMagnitude <= 0.001f) return;
 
         direction.Normalize();
-
         float speed = _isRunnig ? _runSpeed : _walkSpeed;
-
         transform.position += direction * speed * Time.deltaTime;
-
-        transform.forward = direction;
     }
 
     public void OnAttackHit()
@@ -123,16 +164,26 @@ public class Enemy : MonoBehaviour, IDamageable
         _playerUIcontroller.PlayUIAnimation();
     }
 
+    public void OnThrowAttack()
+    {
+        Debug.Log("投げました");
+        if (_throwObj != null)
+        {
+            Instantiate(_throwObj, new Vector3(transform.position.x + 1, transform.position.y + 1, transform.position.z), Quaternion.identity);
+        }
+        if (_throwZombieAnimator != null)
+        {
+            _throwZombieAnimator.SetBool(IsAttack, false);
+        }
+    }
+
     private void OnDestroy()
     {
-
         Die();
     }
 
     public void Die()
     {
-        //Debug.Log($"{gameObject.name}が死亡しました。");
-
-        EnemyDied.Invoke(this);
+        EnemyDied?.Invoke(this); // Null条件演算子で安全に呼び出し
     }
 }

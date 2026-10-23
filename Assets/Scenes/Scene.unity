@@ -31433,7 +31433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd831e09f4b15f14c9a27374140f9564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameFlowController
-  _stageData: {fileID: 11400000, guid: 26faa37a21e07744aae913284dc21069, type: 2}
+  _stageData: {fileID: 11400000, guid: 57bb96d4647cb4546b794b3c8d3e09dd, type: 2}
   _cameraSequencePlayer: {fileID: 1806566654}
   _weaponController: {fileID: 1559958484}
   _shootingSystem: {fileID: 1559958482}
@@ -81021,7 +81021,6 @@ MonoBehaviour:
   - {fileID: 521615248}
   - {fileID: 1201286618}
   - {fileID: 1774607867}
-  bAppearDuration: 0.1
   aFadeDuration: 0.5
   bFadeDuration: 1.5
 --- !u!1001 &1026515065

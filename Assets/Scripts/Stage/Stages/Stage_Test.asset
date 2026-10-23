@@ -13,11 +13,7 @@ MonoBehaviour:
   m_Name: Stage_Test
   m_EditorClassIdentifier: Assembly-CSharp::StageData
   _steps:
-  - _phaseType: 1
-    _battleEnemyGroup: {fileID: 0}
-    _cameraSequenceData: {fileID: 11400000, guid: 13f9d48c414fbc44cb64363c6b41980f, type: 2}
-    _reauiredSelectionCount: 0
   - _phaseType: 2
-    _battleEnemyGroup: {fileID: 11400000, guid: 16a45648f3edc68448cd7afe545508a8, type: 2}
+    _battleEnemyGroup: {fileID: 11400000, guid: d6a0f2c6b297b3d478125bae50050ab7, type: 2}
     _cameraSequenceData: {fileID: 0}
     _reauiredSelectionCount: 0

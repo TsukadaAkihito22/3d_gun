@@ -8,7 +8,6 @@ public class AxController : MonoBehaviour , IDamageable
     private PlayerStatus _playerStatus;
     [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private float _durability = 25f;
-    [SerializeField] private GameObject _childObj = null;
 
     void Start()
     {
@@ -41,18 +40,14 @@ public class AxController : MonoBehaviour , IDamageable
     {
         ////Playerの方向を向く
         transform.LookAt(Camera.main.transform.position);
-        //transform.LookAt(new Vector3(transform.position.x, _playerPos.y, transform.position.z));
-        //transform.LookAt(new Vector3(_playerPos.x, transform.position.y, _playerPos.z));
-        
-        Debug.Log(_playerPos);
 
         //縦回転
         transform.DOLocalRotate(
-            new Vector3(360f, 0f, 0f),           // 回転させたい軸と角度
-            0.5f,                                 // 1回転にかける時間（秒）
+            new Vector3(360f, 0f, 0f),
+            0.5f,
             RotateMode.LocalAxisAdd              // 現在の角度を基準に、ローカル軸で加算回転するモード
         )
-        .SetEase(Ease.Linear)                    // 等速で滑らかに回転させる
+        .SetEase(Ease.InCirc)                    // 等速で滑らかに回転させる
         .SetLoops(-1, LoopType.Incremental);
     }
 

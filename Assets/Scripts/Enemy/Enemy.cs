@@ -169,7 +169,7 @@ public class Enemy : MonoBehaviour, IDamageable
         Debug.Log("投げました");
         if (_throwObj != null)
         {
-            Instantiate(_throwObj, new Vector3(transform.position.x + 1, transform.position.y + 1, transform.position.z), Quaternion.identity);
+            Instantiate(_throwObj, new Vector3(transform.position.x + 1, transform.position.y + 2, transform.position.z), Quaternion.identity);
         }
         if (_throwZombieAnimator != null)
         {

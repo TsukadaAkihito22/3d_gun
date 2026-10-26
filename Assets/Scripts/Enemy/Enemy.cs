@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour, IDamageable
         );
 
         //体力半減処理
-        if (_modeNum != 2 && _currentHP <= _maxHP / 2)
+        if (_modeNum == 0 && _currentHP <= _maxHP / 2)
         {
             if (_normalZombieAnimator != null) _normalZombieAnimator.SetBool(IsHalfHP, true);
             _isRunnig = true;

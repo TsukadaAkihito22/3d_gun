@@ -8674,7 +8674,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint1-5
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -9355,7 +9355,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint1-1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -10209,7 +10209,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint1-3
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -16511,7 +16511,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint1-6
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -25239,7 +25239,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint1-9
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -31433,7 +31433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd831e09f4b15f14c9a27374140f9564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameFlowController
-  _stageData: {fileID: 11400000, guid: 57bb96d4647cb4546b794b3c8d3e09dd, type: 2}
+  _stageData: {fileID: 11400000, guid: 26faa37a21e07744aae913284dc21069, type: 2}
   _cameraSequencePlayer: {fileID: 1806566654}
   _weaponController: {fileID: 1559958484}
   _shootingSystem: {fileID: 1559958482}
@@ -51746,7 +51746,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint1-2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -59838,7 +59838,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint1-7
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -114040,7 +114040,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint1-4
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -122494,8 +122494,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87ff7eb1191c644c9f07c4f04606314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  _weaponType: 3
-  _weaponData: {fileID: 11400000, guid: 1f9b01bfe385092419dbd11016b0933c, type: 2}
+  _weaponType: 1
+  _weaponData: {fileID: 11400000, guid: 67a4546f917440e448eda70c24c9067d, type: 2}
   _audioSource: {fileID: 1559958487}
 --- !u!120 &1559958486
 LineRenderer:
@@ -143451,7 +143451,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint1-8
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

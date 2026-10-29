@@ -31433,7 +31433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd831e09f4b15f14c9a27374140f9564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameFlowController
-  _stageData: {fileID: 11400000, guid: 26faa37a21e07744aae913284dc21069, type: 2}
+  _stageData: {fileID: 11400000, guid: 57bb96d4647cb4546b794b3c8d3e09dd, type: 2}
   _cameraSequencePlayer: {fileID: 1806566654}
   _weaponController: {fileID: 1559958484}
   _shootingSystem: {fileID: 1559958482}
@@ -67666,7 +67666,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.10920957, y: 0.8865396, z: -0.26854745, w: 0.3605596}
   m_LocalPosition: {x: 10.039719, y: 12.975838, z: 128.57971}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 using UnityEngine;
 
 /// <summary> 一般的な敵の情報やイベント通知等を管理するクラス </summary>
@@ -9,6 +10,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [Header("移動")]
     [SerializeField] private float _walkSpeed = 2f;
+    [SerializeField] private float _rageSpeed = 3f;
     [SerializeField] private float _runSpeed = 5f;
 
     [Header("攻撃")]
@@ -17,6 +19,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [Header("参照")]
     [SerializeField] private Animator _normalZombieAnimator;
     [SerializeField] private Animator _throwZombieAnimator;
+    [SerializeField] private Animator _mutantAnimator;
     [SerializeField] private GameObject _throwObj;
     private PlayerUIController _playerUIcontroller;
 
@@ -28,9 +31,12 @@ public class Enemy : MonoBehaviour, IDamageable
     private static readonly int IsDead = Animator.StringToHash("isDead");
     private static readonly int IsClosePlayer = Animator.StringToHash("isClosePlayer");
     private static readonly int IsAttack = Animator.StringToHash("isAttack");
+    private static readonly int IsLevel1 = Animator.StringToHash("isLevel1");
+    private static readonly int IsLevel2 = Animator.StringToHash("isLevel2");
 
     private float _currentHP = 0f;
     private bool _isRunnig = false;
+    private bool _isRaging = false;
     private bool _isDead = false;
     private Transform _playerTransform;
 
@@ -75,6 +81,22 @@ public class Enemy : MonoBehaviour, IDamageable
             $" 部位: {damageData.HitPartTypes}" +
             $" 残りHP: {_currentHP}"
         );
+
+        if (_modeNum == 4)
+        {
+            if (_currentHP <= _maxHP * 0.333f)
+            {
+                _normalZombieAnimator.SetBool(IsLevel2, true);
+                _isRunnig = true;
+                Avoid();
+            }
+            else if (_currentHP <= _maxHP * 0.666f)
+            {
+                _normalZombieAnimator.SetBool(IsLevel1, true);
+                _isRaging = true;
+                Avoid();
+            }
+        }
 
         //体力半減処理
         if (_modeNum == 0 && _currentHP <= _maxHP / 2)
@@ -153,7 +175,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (direction.sqrMagnitude <= 0.001f) return;
 
         direction.Normalize();
-        float speed = _isRunnig ? _runSpeed : _walkSpeed;
+        float speed = _isRunnig ? _runSpeed : _isRaging ? _rageSpeed : _walkSpeed;
         transform.position += direction * speed * Time.deltaTime;
     }
 
@@ -175,6 +197,14 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             _throwZombieAnimator.SetBool(IsAttack, false);
         }
+    }
+
+    private void Avoid()
+    {
+        int avoidDistance = UnityEngine.Random.Range(1, 3);
+        transform.position = new Vector3(transform.position.x,
+                                        transform.position.y,
+                                        transform.position.z + (UnityEngine.Random.Range(0, 2) == 1 ? -avoidDistance : avoidDistance));
     }
 
     private void OnDestroy()

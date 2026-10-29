@@ -184,3 +184,12 @@ Assets/Metall
 Assets/Metall Ax2/
 Assets/Standard Assets/
 Assets/Mutant1/
+Assets/MonsterMutant 7
+*.anim
+*.prefab
+Assets/Scripts/Enemy/EnemyController/Mutant/MutantAnimation.controller
+Assets/Scripts/Enemy/EnemyController/Zombie/NormalZombieAnimation.controller
+Assets/Scripts/Enemy/EnemyController/Zombie/NormalZombieController.cs
+Assets/Scripts/Enemy/EnemyController/Zombie/StartMenuZombieAnimation.controller
+Assets/Scripts/Enemy/EnemyController/Zombie/ThrowZombieAnimation 1.controller
+Assets/Scripts/Enemy/EnemyController/Zombie/ThrowZombieController.cs

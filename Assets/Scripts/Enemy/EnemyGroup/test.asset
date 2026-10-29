@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775d3ff76bfefe541a16f370c031c762, type: 3}
+  m_Name: test
+  m_EditorClassIdentifier: Assembly-CSharp::BattleEnemyGroup
+  _enemyGroupName: "\u30B0\u30EB\u30FC\u30D71"
+  _waves:
+  - _spawnDatas:
+    - _enemyPrefab: {fileID: -6410518403524175955, guid: f2e03fd1cffea284890ee861660f8b1d, type: 3}
+      _spawnPointId: 1-1
+      _spawnCount: 1
+      _spawnDelay: 0
+    - _enemyPrefab: {fileID: 3208702262822552072, guid: 43b3bfc3c2f2ff146a8d85e63d0a4e26, type: 3}
+      _spawnPointId: 1-2
+      _spawnCount: 1
+      _spawnDelay: 0
